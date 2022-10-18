@@ -11,9 +11,20 @@ hosted on app services
 
 
 [GET]
-List blog 
+/list
+
+List blog
+
 [GET]
+/{id}
 fetch blog's detail
 
 [POST]
+/{id}
 publish a blog
+
+[PUT]
+/{id}
+update a blog
+
+
