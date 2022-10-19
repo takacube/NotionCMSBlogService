@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Primitives.Blogs;
 
 namespace Taka.blogs.Services
 {
@@ -21,6 +22,23 @@ namespace Taka.blogs.Services
             this.logger.ToString();
             int count = 0;
             return count;
+        }
+
+        public async Task<bool> IsValidAsync(
+            string text,
+            string? type,
+            CancellationToken cancellationToken
+        )
+        {
+            return true;
+        }
+
+        public async Task<bool> PublishAsync(
+            string text,
+            CancellationToken cancellation
+        )
+        {
+            return true;
         }
     }
 }

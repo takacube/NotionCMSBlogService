@@ -10,5 +10,16 @@ namespace Taka.blogs.Services
     {
         IEnumerable<string> ListBlogs();
         int Sample();
+
+        Task<bool> IsValidAsync(
+            string text,
+            string? type,
+            CancellationToken cancellationToken
+        );
+
+        Task<bool> PublishAsync(
+            string text,
+            CancellationToken cancellationToken
+        );
     }
 }
