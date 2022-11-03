@@ -1,8 +1,8 @@
 ## Blog handle application running on Azure App Services
 
-Backend: ASP.NET Core
+Backend: ASP.NET Core, (ASP.NET Core, Lambda(Typescript))
 
-Frontend: React
+Frontend: React(Next.js)
 
 [ ] you dont have to have front app on /mnt/c/~
 
@@ -19,12 +19,5 @@ List blog
 /{id}
 fetch blog's detail
 
-[POST]
-/{id}
-publish a blog
 
-[PUT]
-/{id}
-update a blog
-
-
+Notion
