@@ -10,7 +10,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: NotionCMSBlogService 
-  AZURE_WEBAPP_PACKAGE_PATH: './Api'      
+  AZURE_WEBAPP_PACKAGE_PATH: '.'      
   DOTNET_VERSION: '6.0.x'
 
 jobs:
@@ -28,6 +28,7 @@ jobs:
       #Run dotnet build and publish: -r linux-x64 
     - name: dotnet build and publish
       run: |
+        cd Api
         dotnet restore
         dotnet build --configuration Release
         dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
