@@ -25,12 +25,12 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
       
-      # Run dotnet build and publish
-      #- name: dotnet build and publish
-      #  run: |
-      #    dotnet restore -r linux-x64
-      #    dotnet build --configuration Release -r linux-x64
-      #    dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api' -r linux-x64
+      #Run dotnet build and publish: -r linux-x64
+    - name: dotnet build and publish
+      run: |
+        dotnet restore
+        dotnet build --configuration Release
+        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api'
           
       # Deploy to Azure Web apps
       #- name: 'Run Azure webapp deploy action using publish profile credentials'
