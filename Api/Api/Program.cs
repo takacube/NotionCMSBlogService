@@ -14,6 +14,8 @@ builder.Services.AddLogging();
 ConfigureServices(builder.Services, builder.Configuration);
 
 var app = builder.Build();
+app.UseRouting();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -25,6 +27,12 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseEndpoints(endpoints =>
+    {
+        endpoints.MapControllers();
+    }
+);
 
 app.MapControllers();
 
