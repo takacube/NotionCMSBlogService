@@ -8,7 +8,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: NotionCMSBlogService 
   AZURE_WEBAPP_PACKAGE_PATH: '.'      
-  DOTNET_VERSION: '3.1.100'
+  DOTNET_VERSION: '6.0.9'
 
 jobs:
   build-and-deploy:
@@ -16,11 +16,11 @@ jobs:
     steps:
 
       # Checkout the repo
-      - uses: actions/checkout@master
+      - uses: actions/checkout@v3
       
       # Setup .NET Core SDK
-      - name: Setup .NET Core
-        uses: actions/setup-dotnet@v1
+      - name: Setup ASP.NET Core
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }} 
       
