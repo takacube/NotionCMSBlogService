@@ -11,21 +11,18 @@ on:
 env:
   AZURE_WEBAPP_NAME: NotionCMSBlogService 
   AZURE_WEBAPP_PACKAGE_PATH: '.'      
-  DOTNET_VERSION: '6.0.9'
+  DOTNET_VERSION: '6.0.x'
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+ runs-on: ubuntu-latest
     steps:
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@v2
 
-      # Checkout the repo
-      - uses: actions/checkout@v3
-      
-      # Setup .NET Core SDK
-      - name: Setup ASP.NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: ${{ env.DOTNET_VERSION }} 
+    - name: Setup DotNet ${{ env.DOTNET_VERSION }} Environment
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
       
       # Run dotnet build and publish
       #- name: dotnet build and publish
