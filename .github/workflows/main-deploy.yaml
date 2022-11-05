@@ -10,7 +10,7 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: NotionCMSBlogService 
-  AZURE_WEBAPP_PACKAGE_PATH: './Api'      
+  AZURE_WEBAPP_PACKAGE_PATH: './Aoi'      
   DOTNET_VERSION: '6.0.x'
 
 jobs:
@@ -41,10 +41,12 @@ jobs:
         ls
         cd Api
         ls
+        cd myapp
+        ls
 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v2
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.DEV_AZURE_PUBLISH_PROFILE  }}
-        package: './Api/Api/myapp'
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
