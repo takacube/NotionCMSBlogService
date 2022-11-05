@@ -28,15 +28,10 @@ jobs:
       #Run dotnet build and publish: -r linux-x64 
     - name: dotnet build and publish
       run: |
-        echo "始まり"
-        ls
         cd Api
         dotnet restore
         dotnet build --configuration Release
-        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api/Api'
-        pwd
-        ls
-        echo '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api'
+        dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
           
       # Deploy to Azure Web apps
     - name: 'Run Azure webapp deploy action using publish profile credentials'
