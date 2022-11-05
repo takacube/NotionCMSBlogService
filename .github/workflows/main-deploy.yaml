@@ -35,15 +35,7 @@ jobs:
       # Deploy to Azure Web apps
     - name: test the directory
       run: | 
-        ls
-        pwd
-        cd Api
-        ls
-        cd Api
-        ls
-        cd myapp
-        ls
-        cd '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}'
+        cd '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/'
         ls
 
     - name: 'Run Azure webapp deploy action using publish profile credentials'
@@ -51,4 +43,4 @@ jobs:
       with: 
         app-name: ${{ env.AZURE_WEBAPP_NAME }}
         publish-profile: ${{ secrets.DEV_AZURE_PUBLISH_PROFILE  }}
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api/Api/myapp'
+        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp/Api'
