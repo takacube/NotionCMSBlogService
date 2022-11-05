@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches: 
+      - main
 
 env:
   AZURE_WEBAPP_NAME: NotionCMSBlogService 
@@ -25,16 +28,16 @@ jobs:
           dotnet-version: ${{ env.DOTNET_VERSION }} 
       
       # Run dotnet build and publish
-      - name: dotnet build and publish
-        run: |
-          dotnet restore -r linux-x64
-          dotnet build --configuration Release -r linux-x64
-          dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api' -r linux-x64
+      #- name: dotnet build and publish
+      #  run: |
+      #    dotnet restore -r linux-x64
+      #    dotnet build --configuration Release -r linux-x64
+      #    dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api' -r linux-x64
           
       # Deploy to Azure Web apps
-      - name: 'Run Azure webapp deploy action using publish profile credentials'
-        uses: azure/webapps-deploy@v2
-        with: 
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.DEV_AZURE_PUBLISH_PROFILE  }}
-          package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api'
+      #- name: 'Run Azure webapp deploy action using publish profile credentials'
+      #  uses: azure/webapps-deploy@v2
+      #  with: 
+      #    app-name: ${{ env.AZURE_WEBAPP_NAME }}
+      #    publish-profile: ${{ secrets.DEV_AZURE_PUBLISH_PROFILE  }}
+      #    package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api'
