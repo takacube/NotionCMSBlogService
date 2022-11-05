@@ -14,8 +14,9 @@ env:
   DOTNET_VERSION: '6.0.x'
 
 jobs:
-  runs-on: ubuntu-latest
-  steps:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
     - name: 'Checkout GitHub Action'
       uses: actions/checkout@v2
 
