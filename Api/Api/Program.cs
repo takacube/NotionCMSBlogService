@@ -1,5 +1,7 @@
+using Blog.Domain;
+using Blog.Primitives;
 using Microsoft.Extensions.Logging;
-using Taka.blogs.Services;
+using Blog.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -43,6 +45,7 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
     // must be singleton because we compare the instance references when merging DefinitiveListFile instances.
 
     services.AddTransient<IBlogService, BlogService>();
+    services.AddTransient<IBlogDomain, BlogDomain>();
     services.AddSingleton<ILoggerFactory, LoggerFactory>();
     services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 }

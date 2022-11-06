@@ -1,27 +1,31 @@
 ﻿using Microsoft.Extensions.Logging;
-using Primitives.Blogs;
-
-namespace Taka.blogs.Services
+using Blog.Primitives;
+using Blog.Domain;
+namespace Blog.Services
 {
     public class BlogService : IBlogService
     {
         private readonly IEnumerable<string> names = new List<string>() { "taka", "nao" };
         private readonly ILogger<BlogService> logger;
-        public BlogService(ILogger<BlogService> logger)
+        private readonly IBlogDomain blogDomain;
+        public BlogService(ILogger<BlogService> logger, IBlogDomain blogDomain)
         {
             this.logger = logger;
+            this.blogDomain = blogDomain;
         }
 
-        public IEnumerable<string> ListBlogs()
+        public IEnumerable<BlogRecord> ListBlogs()
         {
-            return names;            
+            var blogList = this.blogDomain.list();
+            foreach (var blog in blogList)
+            {
+                yield return blog;
+            }            
         }
 
-        public int Sample()
+        public IEnumerable<BlogRecord> GetBlog(string id)
         {
-            this.logger.ToString();
-            int count = 0;
-            return count;
+            return this.blogDomain.get(id);
         }
 
         public async Task<bool> IsValidAsync(
@@ -30,6 +34,7 @@ namespace Taka.blogs.Services
             CancellationToken cancellationToken
         )
         {
+            await Task.WhenAll();
             return true;
         }
 
@@ -38,6 +43,7 @@ namespace Taka.blogs.Services
             CancellationToken cancellation
         )
         {
+            await Task.WhenAll();
             return true;
         }
     }
