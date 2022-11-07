@@ -12,4 +12,9 @@
         string Header,
         string Id
     );
+
+    public record BlogMainRecord(
+        string Title,
+        string Id
+    );
 }

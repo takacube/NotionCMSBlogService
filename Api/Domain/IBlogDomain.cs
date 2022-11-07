@@ -4,8 +4,8 @@ namespace Blog.Domain
 {
     public interface IBlogDomain
     {
-        IEnumerable<BlogRecord> list();
-        IEnumerable<BlogRecord> get(string id);
+        IEnumerable<BlogMainRecord> list();
+        BlogRecord get(string id);
     }
 
 }

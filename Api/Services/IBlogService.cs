@@ -9,8 +9,8 @@ namespace Blog.Services
 {
     public interface IBlogService
     {
-        IEnumerable<BlogRecord> ListBlogs();
-        IEnumerable<BlogRecord> GetBlog(string id);
+        IEnumerable<BlogMainRecord> ListBlogs();
+        BlogRecord GetBlog(string id);
         Task<bool> IsValidAsync(
             string text,
             string? type,

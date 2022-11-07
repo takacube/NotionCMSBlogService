@@ -17,10 +17,10 @@ namespace Taka.blogs
         }
         [HttpGet]
         [Route("list")]
-        public IEnumerable<BlogRecord> ListBlogs()
+        public IEnumerable<BlogMainRecord> ListBlogs()
         {
-            IEnumerable<BlogRecord> nameList = this.BlogService.ListBlogs();
-            foreach (BlogRecord name in nameList)
+            IEnumerable<BlogMainRecord> nameList = this.BlogService.ListBlogs();
+            foreach (BlogMainRecord name in nameList)
             { 
                 Console.WriteLine(name);
                 yield return name;
@@ -30,9 +30,9 @@ namespace Taka.blogs
         [HttpGet]
         [Route("get")]
 
-        public IEnumerable<BlogRecord> GetBlog(string id)
+        public BlogRecord GetBlog(string id)
         {
-            IEnumerable<BlogRecord> blog = this.BlogService.GetBlog(id);
+            BlogRecord blog = this.BlogService.GetBlog(id);
             return blog;
         }
 
