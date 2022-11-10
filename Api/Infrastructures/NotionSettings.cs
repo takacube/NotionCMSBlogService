@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Infrastructures;
+﻿namespace Blog.Infrastructures;
 public record NotionSettings(
     string PageUrl,
     string BlockVhildUrl,
