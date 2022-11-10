@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - tashim/feat-1
 
 env:
   AZURE_WEBAPP_NAME: NotionCMSBlogService 
@@ -27,11 +28,11 @@ jobs:
     - name: Set up config file
       run: | 
         cd Api
-        notion_auth = "${{ secrets.NOTION_AUTH }}"
-        notion_version = "${{ env.NOTION_VERSION }}"
-        blok_url = "${{ secrets.BLOCK_URL}}"
+        notion_auth="${{ secrets.NOTION_AUTH }}"
+        notion_version="${{ env.NOTION_VERSION }}"
+        block_url="${{ secrets.BLOCK_URL}}"
         cat appsettings.json | jq \
-        ".NotionSettings.Authorization=\"$notion_auth\" | .NotionSettings.NotionVersion=\"$notion_version\"| .NotionSettings.BlockUrl=\"$block_url\"" > appsettings.new.json
+        ".NotionSettings.Authorization=\"$notion_auth\" | .NotionSettings.NotionVersion=\"$notion_version\" | .NotionSettings.BlockUrl=\"$block_url\"" > appsettings.new.json
         mv appsettings.new.json appsettings.json 
     - name: dotnet build and publish
       run: |
