@@ -38,8 +38,7 @@ jobs:
         cat appsettings.json | jq \
         ".NotionSettings.Authorization=\"$notion_auth\" | .NotionSettings.NotionVersion=\"$notion_version\" | .NotionSettings.BlockUrl=\"$block_url\"" \
         > appsettings.new.json
-        mv appsettings.new.json appsettings.json
-        cat appsettings.json
+        mv appsettings.new.json Api/appsettings.json
         cat Api/appsettings.json
         echo "app setings file is above"
         dotnet build --configuration Release
