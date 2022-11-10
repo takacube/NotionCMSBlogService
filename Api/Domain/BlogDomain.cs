@@ -1,22 +1,25 @@
-﻿using Blog.Primitives;
+﻿using Blog.Infrastructures;
+using Blog.Primitives;
 using System.Reflection.PortableExecutable;
 
 namespace Blog.Domain
 {
     public class BlogDomain: IBlogDomain
     {
-        public BlogDomain() { 
+        private readonly INotionBlogs notionBlogs;
+        public BlogDomain(INotionBlogs notionBlogs) { 
+            this.notionBlogs = notionBlogs;
         }
 
-        public IEnumerable<BlogRecord> list() {
-            var blogs = new List<BlogRecord>() { new BlogRecord("Content1", "Title1", "Header1", "Id1"), new BlogRecord("Content2", "Title2", "Header2", "Id2") };
+        public IEnumerable<BlogMainRecord> list() {
+            var blogs = this.notionBlogs.FindAllAsync();
             foreach (var record in blogs) { 
                 yield return record;
             }
         }
-
-        public IEnumerable<BlogRecord> get(string id) {
-            yield return new BlogRecord("Content1", "Title1", "Header1", "Id1");
+        public BlogRecord get(string id) {
+            var blog = this.notionBlogs.FindById(id);
+            return blog;
         }
     }
 }

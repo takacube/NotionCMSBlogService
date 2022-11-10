@@ -2,6 +2,8 @@ using Blog.Domain;
 using Blog.Primitives;
 using Microsoft.Extensions.Logging;
 using Blog.Services;
+using Blog.Infrastructures;
+using Infrastructures;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,7 +48,9 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
 
     services.AddTransient<IBlogService, BlogService>();
     services.AddTransient<IBlogDomain, BlogDomain>();
+    services.AddTransient<INotionBlogs, NotionBlogs>();
     services.AddSingleton<ILoggerFactory, LoggerFactory>();
     services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+    services.Configure<NotionSettings>(configuration.GetSection("NotionSettings"));
 }
 

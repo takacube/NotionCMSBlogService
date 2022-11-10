@@ -9,6 +9,7 @@ env:
   AZURE_WEBAPP_NAME: NotionCMSBlogService 
   AZURE_WEBAPP_PACKAGE_PATH: '.'      
   DOTNET_VERSION: '6.0.x'
+  NOTION_VERSION: '2022-06-28'
 
 jobs:
   build-and-deploy:
@@ -22,7 +23,16 @@ jobs:
       with:
         dotnet-version: ${{ env.DOTNET_VERSION }}
       
-      #Run dotnet build and publish: -r linux-x64 
+      #Run dotnet build and publish: -r linux-x64
+    - name: Set up config file
+      run: | 
+        cd Api
+        notion_auth = "${{ secrets.NOTION_AUTH }}"
+        notion_version = "${{ env.NOTION_VERSION }}"
+        blok_url = "${{ secrets.BLOCK_URL}}"
+        cat appsettings.json | jq \
+        ".NotionSettings.Authorization=\"$notion_auth\" | .NotionSettings.NotionVersion=\"$notion_version\"| .NotionSettings.BlockUrl=\"$block_url\"" > appsettings.new.json
+        mv appsettings.new.json appsetings.json 
     - name: dotnet build and publish
       run: |
         cd Api
@@ -30,9 +40,9 @@ jobs:
         dotnet build --configuration Release
         dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
       # Deploy to Azure Web apps (you have to specify /Api/myapp)
-    - name: 'Run Azure webapp deploy action using publish profile credentials'
-      uses: azure/webapps-deploy@v2
-      with: 
-        app-name: ${{ env.AZURE_WEBAPP_NAME }}
-        publish-profile: ${{ secrets.DEV_AZURE_PUBLISH_PROFILE  }}
-        package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api/myapp'
+      #- name: 'Run Azure webapp deploy action using publish profile credentials'
+      #uses: azure/webapps-deploy@v2
+      #with: 
+      #app-name: ${{ env.AZURE_WEBAPP_NAME }}
+      #publish-profile: ${{ secrets.DEV_AZURE_PUBLISH_PROFILE  }}
+      #package: '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/Api/myapp'

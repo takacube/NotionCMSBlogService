@@ -14,7 +14,7 @@ namespace Blog.Services
             this.blogDomain = blogDomain;
         }
 
-        public IEnumerable<BlogRecord> ListBlogs()
+        public IEnumerable<BlogMainRecord> ListBlogs()
         {
             var blogList = this.blogDomain.list();
             foreach (var blog in blogList)
@@ -23,7 +23,7 @@ namespace Blog.Services
             }            
         }
 
-        public IEnumerable<BlogRecord> GetBlog(string id)
+        public BlogRecord GetBlog(string id)
         {
             return this.blogDomain.get(id);
         }
