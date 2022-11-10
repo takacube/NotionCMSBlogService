@@ -38,6 +38,8 @@ jobs:
         cat appsettings.json | jq \
         ".NotionSettings.Authorization=\"$notion_auth\" | .NotionSettings.NotionVersion=\"$notion_version\" | .NotionSettings.BlockUrl=\"$block_url\"" > appsettings.new.json
         cp appsettings.new.json appsettings.json
+        cat appsettings.json
+        echo "app setings file is above"
         dotnet build --configuration Release
         dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
       # Deploy to Azure Web apps (you have to specify /Api/myapp)
