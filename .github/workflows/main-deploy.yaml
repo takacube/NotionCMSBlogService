@@ -31,18 +31,17 @@ jobs:
         dotnet restore
     - name: configigure settings
       run: |
-        cd Api
+        cd Api/Api
         notion_auth="${{ secrets.NOTION_AUTH }}"
         notion_version="${{ env.NOTION_VERSION }}"
         block_url="${{ secrets.BLOCK_URL}}"
         cat appsettings.json | jq \
         ".NotionSettings.Authorization=\"$notion_auth\" | .NotionSettings.NotionVersion=\"$notion_version\" | .NotionSettings.BlockUrl=\"$block_url\"" \
         > appsettings.new.json
-        cat appsettings.new.json
-        cat Api/appsettings.new.json
-        mv Api/appsettings.new.json appsettings.json
-        cat Api/appsettings.json
+        mv appsettings.new.json appsettings.json
+        cat appsettings.json
         echo "app setings file is above"
+        cd ..
         dotnet build --configuration Release
         dotnet publish -c Release -o '${{ env.AZURE_WEBAPP_PACKAGE_PATH }}/myapp'
       # Deploy to Azure Web apps (you have to specify /Api/myapp)
