@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - tashim/feat-1
 
 env:
   AZURE_WEBAPP_NAME: NotionCMSBlogService 
