@@ -51,5 +51,6 @@ static void ConfigureServices(IServiceCollection services, IConfiguration config
     services.AddTransient<INotionBlogs, NotionBlogs>();
     services.AddSingleton<ILoggerFactory, LoggerFactory>();
     services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
+    services.Configure<NotionSettings>(configuration.GetSection("NotionSettings"));
 }
 
