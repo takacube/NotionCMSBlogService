@@ -23,6 +23,14 @@ namespace Blog.Services
             }            
         }
 
+        public IEnumerable<BlogRecord> ListBlogsFullData()
+        {
+            var blogList = this.blogDomain.fullList();
+            foreach (var blog in blogList)
+            {
+                yield return blog;
+            }
+        }
         public BlogRecord GetBlog(string id)
         {
             return this.blogDomain.get(id);
