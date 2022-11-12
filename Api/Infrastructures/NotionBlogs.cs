@@ -86,7 +86,7 @@ namespace Blog.Infrastructures
                 throw new Exception($"statuc code is not 200 but: {resStatusCode}");
             }
        
-            var blogText = string.Join("", results.Select(result => {
+            var blogText = string.Join("\n", results.Select(result => {
                 if (result is not null)
                 {
                     return (result.type == "paragraph" && result.paragraph.rich_text.Count() != 0) ? result.paragraph.rich_text[0].text.content: "";
