@@ -21,5 +21,13 @@ namespace Blog.Domain
             var blog = this.notionBlogs.FindById(id);
             return blog;
         }
+
+        public IEnumerable<BlogRecord> fullList() {
+            var blogs = this.notionBlogs.FindAllAsync();
+            foreach (var record in blogs) {
+                var blogFullInofo = this.get(record.Id);
+                yield return blogFullInofo;
+            }
+        }
     }
 }

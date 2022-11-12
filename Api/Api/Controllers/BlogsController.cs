@@ -28,12 +28,24 @@ namespace Taka.blogs
         }
 
         [HttpGet]
-        [Route("get")]
+        [Route("")]
 
         public BlogRecord GetBlog(string id)
         {
             BlogRecord blog = this.BlogService.GetBlog(id);
             return blog;
+        }
+
+        [HttpGet]
+        [Route("full_list")]
+
+        public IEnumerable<BlogRecord> ListFullBlogs()
+        {
+            IEnumerable<BlogRecord> blogList = this.BlogService.ListBlogsFullData();
+            foreach (BlogRecord blog in blogList)
+            {
+                yield return blog;
+            }
         }
 
         [HttpPost]
