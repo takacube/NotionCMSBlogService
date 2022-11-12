@@ -5,7 +5,6 @@ namespace Blog.Services
 {
     public class BlogService : IBlogService
     {
-        private readonly IEnumerable<string> names = new List<string>() { "taka", "nao" };
         private readonly ILogger<BlogService> logger;
         private readonly IBlogDomain blogDomain;
         public BlogService(ILogger<BlogService> logger, IBlogDomain blogDomain)
