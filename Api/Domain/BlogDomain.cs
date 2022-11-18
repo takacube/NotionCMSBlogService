@@ -19,6 +19,7 @@ namespace Blog.Domain
         }
         public BlogRecord get(string id) {
             var blog = this.notionBlogs.FindById(id);
+            blog.Content.Replace(blog.Content, $"<a href=\"{blog.Content}\">{blog.Content}</a>");
             return blog;
         }
 
@@ -28,6 +29,10 @@ namespace Blog.Domain
                 var blogFullInofo = this.get(record.Id);
                 yield return blogFullInofo;
             }
+        }
+
+        public string toUrl(string content) {
+            return content;        
         }
     }
 }
