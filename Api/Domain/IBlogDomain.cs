@@ -7,6 +7,7 @@ namespace Blog.Domain
         IEnumerable<BlogMainRecord> list();
         BlogRecord get(string id);
         IEnumerable<BlogRecord> fullList();
+        string toUrl(string content);
     }
 
 }
